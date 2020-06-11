@@ -35,6 +35,9 @@
 2. Stream
 3. Promise
 
+##### EventLoop
+```composer require react/event-loop:^1.1.1```
+
 ### AMP
 
 ### AmazonSQS

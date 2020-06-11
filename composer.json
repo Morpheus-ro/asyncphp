@@ -8,5 +8,14 @@
             "email": "denys@bulakhweb.com"
         }
     ],
-    "require": {}
+    "autoload": {
+        "psr-4": {
+            "Bulakh\\Models\\": "src/models",
+            "Bulakh\\Services\\": "src/services",
+            "Bulakh\\Infrastructure\\": "src/infrastructure"
+        }
+    },
+    "scripts": {
+        "booking-create": "Bulakh\\Services\\BookingService::createBookingCmd"
+    }
 }
