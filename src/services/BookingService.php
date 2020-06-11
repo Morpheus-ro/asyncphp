@@ -19,6 +19,7 @@ class BookingService
             $provider->register($ticket);
         }
         $booking->setTicket($ticket);
+        $booking->save();
 
         return $booking->getInfo();
     }

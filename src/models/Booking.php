@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Bulakh\Models;
 
+use Bulakh\Services\LoggingService;
+
 class Booking {
     protected $bookingNumber = null;
     protected $ticket = null;
@@ -25,6 +27,13 @@ class Booking {
     public function getTicket(): ?Ticket
     {
         return $this->ticket;
+    }
+
+    public function save(): bool
+    {
+        LoggingService::getLogger()->info("Booking saved", [$this->getBookingNumber()]);
+
+        return true;
     }
 
     public function getInfo(): array

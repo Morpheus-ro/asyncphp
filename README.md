@@ -27,17 +27,6 @@
 - Process performance
 
 ## How?
-- Asynchronious PHP frameworks
-- Native PHP with message queues
-
-### ReactPHP
-1. EventLoop
-2. Stream
-3. Promise
-
-##### EventLoop
-```composer require react/event-loop:^1.1.1```
-
-### AMP
-
-### AmazonSQS
+- EventLoop (ReactPHP, Amp)
+- Coroutine (Swoole)
+- Message queues (RabbitMQ, Amazon SQS...)
