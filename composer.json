@@ -1,0 +1,12 @@
+{
+    "name": "denysbulakh/asyncphp",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Denys Bulakh",
+            "email": "denys@bulakhweb.com"
+        }
+    ],
+    "require": {}
+}
