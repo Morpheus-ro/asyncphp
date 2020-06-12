@@ -11,7 +11,7 @@ class ProvidersRepository
     {
         $providers = [];
 
-        for ($i = 0; $i < rand(5,10); $i++) {
+        for ($i = 0; $i < 10; $i++) {
             $providers[] = new Provider();
         }
 
