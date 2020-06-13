@@ -17,6 +17,7 @@ class BookingService
         /** @var Provider $provider */
         foreach (ProvidersRepository::getArray() as $provider) {
             $provider->register($ticket);
+            $booking->addProvider($provider);
         }
         $booking->setTicket($ticket);
         $booking->save();

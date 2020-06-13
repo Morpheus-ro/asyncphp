@@ -8,6 +8,7 @@ use Bulakh\Services\LoggingService;
 class Booking {
     protected $bookingNumber = null;
     protected $ticket = null;
+    protected $providers = [];
 
     public function __construct()
     {
@@ -19,6 +20,11 @@ class Booking {
         $this->ticket = $ticket;
     }
 
+    public function addProvider(Provider $provider)
+    {
+        $this->providers[] = $provider;
+    }
+
     public function getBookingNumber(): string
     {
         return $this->bookingNumber;
@@ -27,6 +33,11 @@ class Booking {
     public function getTicket(): ?Ticket
     {
         return $this->ticket;
+    }
+
+    public function getProviders()
+    {
+        return $this->providers;
     }
 
     public function save(): bool
@@ -41,6 +52,9 @@ class Booking {
         return [
             'booking_number' => $this->getBookingNumber(),
             'ticket_code' => $this->getTicket()->getCode(),
+            'provider_ids' => array_map(function(Provider $provider) {
+                return $provider->getId();
+            }, $this->getProviders()),
         ];
     }
 }
