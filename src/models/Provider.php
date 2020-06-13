@@ -22,7 +22,6 @@ class Provider
 
     public function register(Ticket $ticket): void
     {
-        sleep(1);
         RegisterRequest::send($ticket->getCode(), $this->getId());
     }
 }
