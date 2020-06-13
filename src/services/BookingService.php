@@ -10,7 +10,7 @@ use Bulakh\Infrastructure\ProvidersRepository;
 
 class BookingService
 {
-    public static function createBooking(): array
+    public static function createBooking(): Booking
     {
         $booking = new Booking();
         $ticket = new Ticket();
@@ -22,7 +22,7 @@ class BookingService
         $booking->setTicket($ticket);
         $booking->save();
 
-        return $booking->getInfo();
+        return $booking;
     }
 
     public static function createBookingCmd(): void
@@ -30,7 +30,7 @@ class BookingService
         $timeMarker = microtime(true);
 
         echo json_encode([
-            'booking' => self::createBooking(),
+            'booking' => self::createBooking()->getInfo(),
             'execution_time' => round(microtime(true) - $timeMarker, 3),
         ], JSON_PRETTY_PRINT);
     }
