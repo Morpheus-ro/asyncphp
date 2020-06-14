@@ -23,7 +23,7 @@ class BookingService
                 return $booking;
             })
             ->then(function (Booking $booking) use ($deferred) {
-                self::registerBooking($booking);
+                RegisterService::registerBooking($booking);
                 return $booking;
             })
             ->then(function (Booking $booking) use ($deferred) {
@@ -38,15 +38,6 @@ class BookingService
     {
         $booking = new Booking();
         $deferredBooking->resolve($booking);
-    }
-
-    public static function registerBooking(Booking $booking)
-    {
-        /** @var Provider $provider */
-        foreach (ProvidersRepository::getArray() as $provider) {
-            $provider->register($booking->getTicket());
-            $booking->addProvider($provider);
-        }
     }
 
     public static function createBookingCmd(): void
