@@ -8,27 +8,31 @@ use Bulakh\Infrastructure\RegisterRequest;
 
 class Registration
 {
-    protected $providerId = '';
-    protected $ticketCode = '';
+    protected $provider = null;
+    protected $booking = null;
 
-    public function __construct($ticketCode, $providerId)
+    public function __construct(Booking $booking, Provider $provider)
     {
-        $this->providerId = $providerId;
-        $this->ticketCode = $ticketCode;
+        $this->booking = $booking;
+        $this->provider = $provider;
     }
 
-    public function register(): void
+    public function register(): bool
     {
-        RegisterRequest::send($this->ticketCode, $this->providerId);
+        return RegisterRequest::send($this->getTicketCode(), $this->getProviderId());
     }
 
     public function getTicketCode(): string
     {
-        return $this->ticketCode;
+        if (!is_null($this->booking)) {
+            return $this->booking->getTicket()->getCode();
+        }
+
+        return '';
     }
 
     public function getProviderId(): string
     {
-        return $this->providerId;
+        return $this->provider->getId();
     }
 }

@@ -21,20 +21,27 @@ class RegisterService
         foreach (ProvidersRepository::getArray() as $provider) {
             $taskDeferred = new Deferred();
             $taskDeferred->promise()
-                ->then(function(Registration $registration) {
-                    LoggingService::getLogger()
-                        ->info("Registered", [$registration->getTicketCode(), $registration->getProviderId()]);
-                });
+                ->done(
+                    function() use ($booking, $provider) {
+                        $booking->addProvider($provider);
+                        LoggingService::getLogger()
+                            ->info("Registered", [$booking->getBookingNumber(), $provider->getId()]);
+                    },
+                    function() use ($booking, $provider) {
+                        LoggingService::getLogger()
+                            ->info("Registration failed", [$booking->getBookingNumber(), $provider->getId()]);
+                    }
+                );
 
             self::$pendingRegistrationTasks[] = $taskDeferred;
 
-            $registration = new Registration($booking->getTicket()->getCode(), $provider->getId());
-
-            $registration->register();
-
-            $taskDeferred->resolve($registration);
-
-            $booking->addProvider($provider);
+            $registration = new Registration($booking, $provider);
+            $result = $registration->register();
+            if ($result) {
+                $taskDeferred->resolve($registration);
+            } else {
+                $taskDeferred->reject('Failed');
+            }
         }
     }
 }
