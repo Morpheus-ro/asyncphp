@@ -18,4 +18,9 @@ class RegisterRequest
 
         return $result === 1;
     }
+
+    public static function asyncSend(Event $event): void
+    {
+        self::send($event->getArguments()[0], $event->getArguments()[1]) ? exit(0) : exit(1);
+    }
 }
