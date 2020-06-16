@@ -6,6 +6,11 @@ RUN php composer-setup.php
 RUN php -r "unlink('composer-setup.php');"
 RUN mv composer.phar /usr/local/bin/composer
 
+RUN pecl install swoole
+RUN touch /usr/local/etc/php/conf.d/swoole.ini && \
+    echo 'extension=swoole.so' > /usr/local/etc/php/conf.d/swoole.ini
+RUN php --ri swoole
+
 COPY . /usr/src/asyncphp
 WORKDIR /usr/src/asyncphp
 CMD [ "composer", "booking-create" ]

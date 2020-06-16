@@ -42,9 +42,9 @@ class RegisterService
             $registration->register($loop, $taskDeferred);
         }
 
-        $promiseAll = \React\Promise\any(array_map(function(Deferred $item) {
+        $promiseAll = \React\Promise\some(array_map(function(Deferred $item) {
             return $item->promise();
-        }, self::$pendingRegistrationTasks));
+        }, self::$pendingRegistrationTasks), 3);
 
         $promiseAll->then(function() use ($booking, $deferred) {
             $deferred->resolve($booking);

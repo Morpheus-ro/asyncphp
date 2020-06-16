@@ -14,19 +14,29 @@
 
 ## Why?
 
-- Background (asynchronious) execution
-- Parallel execution
-
-#### Asynchronious execution
+### Asynchronious execution
 - Higher UI responsiveness
-- Secondary processes
-- Non-blocking execution
+- Timers
+- Repetitive processes
+- Listeners 
+- ...
 
-#### Parallel execution
-- Faster import/export tasks
+### Parallel execution
 - Process performance
+- Faster input/output
+- Importing/exporting
+- ...
 
 ## How?
-- EventLoop (ReactPHP, Amp)
-- Coroutine (Swoole)
-- Message queues (RabbitMQ, Amazon SQS...)
+### ReactPHP
+- Promises
+- Event loop
+- Child processes
+
+### Swoole
+- Coroutines
+- Channels
+- Multiprocessing
+
+### RabbitMQ
+- Message queues
