@@ -21,7 +21,7 @@ class Registration
 
     public function register(LoopInterface $loop, Deferred $taskDeferred): void
     {
-
+        \Swoole\Runtime::enableCoroutine();
         $that = $this;
 
         go(function() use ($taskDeferred, $that) {
